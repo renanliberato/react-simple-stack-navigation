@@ -3,6 +3,10 @@
   "version": "1.0.1",
   "description": "Simple react navigation module for projects prototyping",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/renanliberato/react-simple-stack-navigation"
+  },
   "scripts": {
     "test": "jest"
   },
