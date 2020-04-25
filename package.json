@@ -1,0 +1,11 @@
+{
+  "name": "react-simple-stack-navigation",
+  "version": "1.0.0",
+  "description": "Simple react navigation module for projects prototyping",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Renan Liberato",
+  "license": "MIT"
+}
