@@ -12,6 +12,9 @@ function navigationReducer(state = [], action = {}) {
         case 'push':
             return state.concat(stackItem(action.screen, action.params))
         case 'pop':
+            if (state.length == 1) {
+                return state;
+            }
             const newState = state.map(s => s);
             newState.pop();
 
