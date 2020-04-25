@@ -1,6 +1,6 @@
 {
   "name": "react-simple-stack-navigation",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple react navigation module for projects prototyping",
   "main": "index.js",
   "scripts": {
