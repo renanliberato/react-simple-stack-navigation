@@ -12,10 +12,11 @@
   },
   "author": "Renan Liberato",
   "license": "MIT",
-  "dependencies": {
+  "peerDependencies": {
     "react": "^16.9.0"
   },
   "devDependencies": {
+    "react": "^16.9.0",
     "@babel/preset-env": "^7.9.5",
     "@babel/preset-react": "^7.9.4",
     "babel-jest": "^25.4.0",
