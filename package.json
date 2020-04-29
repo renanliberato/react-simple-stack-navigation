@@ -1,14 +1,16 @@
 {
   "name": "react-simple-stack-navigation",
-  "version": "1.0.3",
+  "version": "1.1",
   "description": "Simple react navigation module for projects prototyping",
   "main": "index.js",
+  "types": "index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/renanliberato/react-simple-stack-navigation"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "prepublish": "tsc"
   },
   "author": "Renan Liberato",
   "license": "MIT",
@@ -16,11 +18,12 @@
     "react": "^16.9.0"
   },
   "devDependencies": {
-    "react": "^16.9.0",
     "@babel/preset-env": "^7.9.5",
     "@babel/preset-react": "^7.9.4",
+    "@babel/preset-typescript": "^7.9.0",
     "babel-jest": "^25.4.0",
     "jest": "^25.4.0",
+    "react": "^16.9.0",
     "react-hooks-testing-library": "^0.6.0",
     "react-test-renderer": "^16.9.0"
   }
