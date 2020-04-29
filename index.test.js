@@ -1,6 +1,6 @@
 import React from 'react';
 import { renderHook, act } from '@testing-library/react-hooks';
-import { useNavigation } from './index';
+import { useNavigation, ActionTypes } from './index';
 
 function FirstScreen() {
     return (
@@ -43,6 +43,7 @@ test('currentScreen should return stack previous item after using navigateBack',
 
     expect(result.current.currentScreen.ScreenComponent).toBe(FirstScreen);
 });
+
 test('currentScreen should throw error if trying to execute navigateBack with no previous screen', () => {
     const { result } = renderHook(() => useNavigation(FirstScreen));
 
@@ -50,5 +51,36 @@ test('currentScreen should throw error if trying to execute navigateBack with no
         result.current.navigateBack();
     });
 
+    expect(result.current.currentScreen.ScreenComponent).toBe(FirstScreen);
+});
+
+test('middleware should be called whenever calling navigateTo', () => {
+    const middleware = jest.fn((action, next) => next(action));
+    const { result } = renderHook(() => useNavigation(FirstScreen, {}, middleware));
+
+    act(() => {
+        result.current.navigateTo(SecondScreen);
+    });
+
+    expect(middleware.mock.calls[0][0].type).toBe('push');
+    expect(middleware.mock.calls[0][0].screen).toBe(SecondScreen);
+    expect(result.current.currentScreen.ScreenComponent).toBe(SecondScreen);
+});
+
+test('middleware should be called whenever calling navigateBack', () => {
+    const middleware = jest.fn((action, next) => next(action));
+    const { result } = renderHook(() => useNavigation(FirstScreen, {}, middleware));
+
+    act(() => {
+        result.current.navigateTo(SecondScreen);
+    });
+
+    act(() => {
+        result.current.navigateBack();
+    });
+
+    expect(middleware.mock.calls[0][0].type).toBe('push');
+    expect(middleware.mock.calls[0][0].screen).toBe(SecondScreen);
+    expect(middleware.mock.calls[1][0].type).toBe('pop');
     expect(result.current.currentScreen.ScreenComponent).toBe(FirstScreen);
 });
