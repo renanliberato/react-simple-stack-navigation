@@ -79,3 +79,30 @@ function HowToPlayScreen({navigateBack}) {
     );
 }
 ```
+
+## Adding a middleware
+
+When adding useNavigationReducer, we can specify a middleware that will run between navigation calls. This middleware can be used for sending analytics events on page changes, for example.
+
+Let's add it to our app:
+```
+import { useNavigation } from 'react-simple-stack-navigation';
+
+function navigationAnalyticsMiddleware(action, next) {
+    // sendEvent('page_view');
+
+    // If you want to prevent navigation, just do not call next(action) and return null.
+    return next(action);
+}
+
+function App() {
+    const { currentScreen, navigateTo, navigateBack } = useNavigation(MainScreen, {}, navigationAnalyticsMiddleware);
+
+    const { ScreenComponent } = currentScreen;
+
+    // We can pass additional props to our screen as usual.
+    return (
+        <ScreenComponent navigateTo={navigateTo} navigateBack={navigateBack} />
+    );
+}
+```

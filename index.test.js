@@ -84,3 +84,20 @@ test('middleware should be called whenever calling navigateBack', () => {
     expect(middleware.mock.calls[1][0].type).toBe('pop');
     expect(result.current.currentScreen.ScreenComponent).toBe(FirstScreen);
 });
+
+
+
+test('returning nothing from a middleware should prevent navigation', () => {
+    const middleware = jest.fn((action, next) => null);
+    const { result } = renderHook(() => useNavigation(FirstScreen, {}, middleware));
+
+    act(() => {
+        result.current.navigateTo(SecondScreen);
+    });
+
+    expect(middleware.mock.calls[0][0].type).toBe('push');
+    expect(middleware.mock.calls[0][0].screen).toBe(SecondScreen);
+    
+    expect(result.current.navStack.length).toBe(1);
+    expect(result.current.currentScreen.ScreenComponent).toBe(FirstScreen);
+});
